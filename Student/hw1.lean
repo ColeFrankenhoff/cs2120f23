@@ -73,7 +73,11 @@ similar Boolean operators, such as *xor* and *nor*.
 -/
 
 -- Write your code here
-
+def impl : Bool -> Bool -> Bool
+| true, true => true
+| true, false => false
+| false, true => false
+| false, false => true
 /-!
 ## Problem 3: Prove correctness by exhaustive testing
 Prove that your implementation of imp is corret
@@ -84,7 +88,10 @@ end of each #eval line, as we've done in class.
 -/
 
 -- Write your answers here:
-#eval _   -- etc
+#eval impl true true  -- true
+#eval impl true false -- false
+#eval impl false true -- false
+#eval impl true true -- true
 
 /-!
 ## 4. Glue together two compatible functions
