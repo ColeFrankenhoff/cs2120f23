@@ -150,8 +150,8 @@ right, the following test cases should pass.
 -/
 
 -- Now complete the implementation of glue_funs'
-def glue_funs' : _
-| _ => _
+def glue_funs' : (Nat -> Bool) -> (String -> Nat) -> String -> Bool
+| g, f, s => g (f s)
 
 #eval glue_funs' isEven String.length "Hello"  -- false
 #eval glue_funs' isEven String.length "Hello!" -- true
@@ -196,8 +196,8 @@ of the type arguments are implicit and inferred.
 -/
 
 -- Implement glue_funs here
-def glue_funs : _
-| _ => _
+def glue_funs: {α β γ : Type} -> (β → γ) -> (α → β) -> α -> γ
+|_, _, _, g, f, s => g (f s)
 
 -- test cases
 #eval glue_funs isEven String.length "Hello"  -- false
@@ -217,8 +217,13 @@ as applying square after double?
 -/
 
 -- Copy the double and square functions here
+def double : Nat → Nat
+| n => 2 * n
 
+def square : Nat → Nat
+| n => n^2
 -- Write your tests here; include expected results
+#eval glue_funs double square 5 -- 50 is expected result
+#eval glue_funs square double 5 -- 100 should be expected
 
-#eval _
-#eval _
+-- I don't expect there to be a difference because order of operations matters.
